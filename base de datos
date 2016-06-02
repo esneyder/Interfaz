@@ -1,0 +1,50 @@
+
+CREATE TABLE `user` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`username` CHAR(50) NOT NULL,
+	`password` CHAR(50) NOT NULL,
+	`email` CHAR(50) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`id`)
+)
+COMMENT='Table user'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=141
+;
+
+go
+CREATE TABLE `patent` (
+	`id` CHAR(50) NOT NULL,
+	`name` CHAR(50) NOT NULL,
+	`lastname` CHAR(50) NULL DEFAULT NULL,
+	`birthdate` CHAR(50) NULL DEFAULT NULL,
+	`age` CHAR(3) NULL DEFAULT NULL,
+	`gender` CHAR(20) NULL DEFAULT NULL,
+	`address` CHAR(100) NULL DEFAULT NULL,
+	`phone` CHAR(20) NULL DEFAULT NULL,
+	`email` CHAR(50) NULL DEFAULT NULL,
+	`bloodtype` CHAR(5) NULL DEFAULT NULL,
+	`state` CHAR(20) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='table patient'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+go
+CREATE TABLE `appointment` (
+	`id` CHAR(50) NOT NULL,
+	`idpaciente` CHAR(50) NOT NULL,
+	`date` CHAR(50) NOT NULL,
+	`time` CHAR(20) NOT NULL,
+	`matter` TEXT NOT NULL,
+	`state` CHAR(20) NOT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `FK_appointment_patent` (`idpaciente`),
+	CONSTRAINT `FK_appointment_patent` FOREIGN KEY (`idpaciente`) REFERENCES `patent` (`id`)
+)
+COMMENT='table appointment'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
